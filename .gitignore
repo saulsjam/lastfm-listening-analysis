@@ -4,3 +4,4 @@ __pycache__/
 scratch/
 data/raw/
 .DS_Store
+data/.DS_Store
