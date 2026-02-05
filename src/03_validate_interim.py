@@ -20,7 +20,7 @@ EXPECTED_FIELDS = [
 ]
 
 def is_blank(value: str | None) -> bool:
-    return value is None or value.strip() == ""
+    return (value is None) or (value.strip() == "")
 
 def main() -> int:
     if not INTERIM_CSV.exists():
