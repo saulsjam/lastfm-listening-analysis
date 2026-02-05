@@ -60,7 +60,6 @@ def main() -> None:
     print(f"Saved page 1/{total_pages}")
 
     # ---- loop pages 2..total_pages ----
-    # ---- loop pages 2..total_pages ----
     for page_num in range(2, total_pages + 1):
         params["page"] = page_num
 
