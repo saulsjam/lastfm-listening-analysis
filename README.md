@@ -31,6 +31,13 @@ This repository is organized as a linear, reproducible pipeline:
 
 2. **02_flatten_lastfm.py**  
    Read all raw JSON page files, extract one row per scrobble, and write a single flattened interim dataset as CSV. Lineage fields (`source_page`, `source_file`) are included for traceability.
+   
+3. **03_validate_interim.py**  
+   Validate structural assumptions about the interim dataset (schema, required fields, timestamp parseability, duplicate detection). This script enforces pipeline contracts before any transformation is applied.
+
+4. **04_make_processed.py**  
+   Read the validated interim dataset, derive explicit UTC timestamp and time-part fields (date, year, month, day-of-week, hour), and write a processed CSV for downstream analysis. No filtering, deduplication, or analytical aggregation is performed.
+
 
 Running these scripts in order reproduces the interim dataset used for analysis.
 
@@ -51,6 +58,18 @@ Schema:
 - `source_page`
 - `source_file`
 
+## Processed Output
+- Time-enriched scrobble dataset  
+  `data/processed/lastfm_scrobbles_processed.csv`
+
+Derived fields include:
+- UTC timestamp (`played_at_ts_utc`)
+- Calendar date (`date_utc`)
+- Year, month, day-of-week, and hour (UTC)
+
+The processed dataset preserves all interim fields and adds only derived time features. No records are filtered or modified.
+
+
 ---
 
 ## Environment & Reproducibility
@@ -69,4 +88,15 @@ To reproduce:
 3. Run:
 	python src/01_fetch_lastfm.py
 	python src/02_flatten_lastfm.py
+	python src/03_validate_interim.py
+	python src/04_make_processed.py
 
+---
+
+## Project Status
+The raw, interim, and processed data layers are complete and reproducible.
+
+Next steps include:
+- Exploratory analysis of long-run listening patterns
+- Optional modeling of assumed local listening times
+- Tableau dashboard development
