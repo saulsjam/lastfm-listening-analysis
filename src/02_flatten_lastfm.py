@@ -1,4 +1,23 @@
-# src/02_flatten_lastfm.py
+"""
+02_flatten_lastfm.py
+
+Purpose:
+    Read raw paginated Last.fm JSON responses and extract one row per scrobble,
+    writing a flattened interim CSV dataset.
+
+Input:
+    - Raw JSON files in data/raw/lastfm_getrecenttracks_pages/
+
+Output:
+    - data/interim/lastfm_scrobbles_interim.csv
+
+Notes:
+    - One row is written per track object returned by the API.
+    - No filtering, deduplication, or timestamp transformation is performed.
+    - Unix timestamps (UTC) are preserved as provided by the API.
+    - Lineage fields (source_page, source_file) are included for traceability.
+"""
+
 from pathlib import Path
 import json
 import csv

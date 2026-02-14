@@ -1,4 +1,26 @@
-# src/01_fetch_lastfm.py
+"""
+01_fetch_lastfm.py
+
+Purpose:
+    Fetch paginated listening history from the Last.fm API using the
+    `user.getRecentTracks` endpoint and write raw JSON responses to disk.
+
+Input:
+    - LASTFM_API_KEY (environment variable)
+    - LASTFM_USERNAME (environment variable)
+
+Output:
+    - One raw JSON file per API page in data/raw/
+
+Notes:
+    - No transformation, filtering, or deduplication is performed.
+    - API responses are written exactly as returned to preserve source fidelity.
+    - Retry logic is implemented to handle intermittent 5xx API errors.
+    - Total scrobble counts may change between runs as listening activity continues.
+    - Timestamps are preserved as Unix epoch values (UTC) at this stage.
+"""
+
+
 from pathlib import Path
 import json
 import os

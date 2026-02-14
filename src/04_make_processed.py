@@ -1,12 +1,28 @@
 """
 04_make_processed.py
 
-Read interim scrobbles CSV, add derived UTC time fields, and write processed CSV.
-No filtering, deduplication, or analysis.
+Purpose:
+    Read the validated interim scrobble dataset, derive explicit UTC-based
+    time features, and write a processed CSV for downstream analysis.
 
-Input:  data/interim/lastfm_scrobbles_interim.csv
-Output: data/processed/lastfm_scrobbles_processed.csv
+Input:
+    - data/interim/lastfm_scrobbles_interim.csv
+
+Output:
+    - data/processed/lastfm_scrobbles_processed.csv
+
+Derived fields:
+    - played_at_epoch (integer Unix timestamp, UTC)
+    - played_at_ts_utc (ISO 8601 UTC timestamp)
+    - date_utc (calendar date)
+    - year_utc, month_utc, dow_utc, hour_utc (UTC components)
+
+Notes:
+    - Timestamps are parsed explicitly using timezone-aware UTC handling.
+    - No filtering, deduplication, or analytical aggregation is performed.
+    - All interim fields are preserved; only derived time fields are added.
 """
+
 
 from __future__ import annotations
 

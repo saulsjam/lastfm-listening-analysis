@@ -1,4 +1,29 @@
-# src/03_validate_interim.py
+"""
+03_validate_interim.py
+
+Purpose:
+    Validate structural assumptions about the flattened interim scrobble dataset
+    before any transformation or enrichment is applied.
+
+Input:
+    - data/interim/lastfm_scrobbles_interim.csv
+
+Output:
+    - Printed validation report (stdout)
+    - Non-zero exit code on structural failure
+
+Checks performed:
+    - Header matches expected schema exactly
+    - Required fields are not blank (played_at_utc, track_name, artist_name)
+    - played_at_utc values parse as integer Unix epoch seconds (UTC)
+    - Simple duplicate signal based on (played_at_utc, track_name, artist_name)
+
+Notes:
+    - No deduplication or correction is performed in this stage.
+    - The script enforces pipeline contracts but does not modify data.
+    - Only structural violations cause failure; informational metrics are reported.
+"""
+
 from __future__ import annotations
 
 import csv
