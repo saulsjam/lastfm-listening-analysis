@@ -1,9 +1,8 @@
 # Last.fm Listening Analysis
 
 ## Project Goal
-Analyze long-run listening patterns using my personal Last.fm listening history (~146k scrobbles). This project is designed as a resume-ready analytics portfolio piece emphasizing a conventional, reproducible ETL pipeline and time-based descriptive analysis.
 
-The focus is on clarity, separation of concerns, and boring-on-purpose correctness rather than novelty or clever optimization.
+Analyze long-run listening behavior using personal Last.fm history (~146k scrobbles). The project emphasizes a conventional, reproducible ETL pipeline and disciplined time-based aggregation rather than novelty or optimization.
 
 ---
 
@@ -83,20 +82,31 @@ The processed dataset preserves all interim fields and adds only derived time fe
 To reproduce:
 1. Clone the repository
 2. Create a `.env` file with:
-	LASTFM_API_KEY=...
-	LASTFM_USERNAME=...
+LASTFM_API_KEY=...
+LASTFM_USERNAME=...
 3. Run:
-	python src/01_fetch_lastfm.py
-	python src/02_flatten_lastfm.py
-	python src/03_validate_interim.py
-	python src/04_make_processed.py
+python src/01_fetch_lastfm.py
+python src/02_flatten_lastfm.py
+python src/03_validate_interim.py
+python src/04_make_processed.py
 
 ---
 
-## Project Status
-The raw, interim, and processed data layers are complete and reproducible.
+## Visualization Layer
 
-Next steps include:
-- Exploratory analysis of long-run listening patterns
-- Optional modeling of assumed local listening times
-- Tableau dashboard development
+A Tableau dashboard built on the processed dataset analyzes longitudinal listening behavior across three dimensions:
+
+- Volume — total scrobbles per year
+- Breadth — distinct artists per year
+- Intensity — average scrobbles per artist per year
+
+Key structural findings:
+
+- Listening volume increased materially after 2018.
+- Distinct artist breadth expanded sharply beginning around 2013.
+- Average scrobbles per artist declined as breadth increased.
+
+![Tableau dashboard showing scrobbles per year and artist breadth vs intensity](tableau/listening_dashboard.png)
+
+Tableau Public dashboard:
+[Long-run listening behavior](https://public.tableau.com/app/profile/james.sauls/viz/Last_fmListeningAnalysis/Dashboard1)
