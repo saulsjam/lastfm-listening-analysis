@@ -67,6 +67,10 @@ def main() -> None:
 
     out_path = interim_dir / "lastfm_scrobbles_interim.csv"
 
+    if not rows:
+        print("No rows collected. Is the raw data folder empty?")
+        return
+
     fieldnames = rows[0].keys()
 
     with out_path.open("w", newline="", encoding="utf-8") as f:
