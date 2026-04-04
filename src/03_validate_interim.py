@@ -30,7 +30,8 @@ import csv
 from pathlib import Path
 from collections import Counter
 
-INTERIM_CSV = Path("data/interim/lastfm_scrobbles_interim.csv")
+project_root = Path(__file__).resolve().parents[1]
+INTERIM_CSV = project_root / "data" / "interim" / "lastfm_scrobbles_interim.csv"
 
 EXPECTED_FIELDS = [
     "played_at_utc",
